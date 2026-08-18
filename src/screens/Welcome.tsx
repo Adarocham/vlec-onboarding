@@ -8,7 +8,7 @@ export default function Welcome() {
     <div className="w-full h-screen flex">
       {/* A-Frame Scene */}
       <Panorama360
-        videoSrc="/Users/antoniodarocha/Downloads/Videos360VLEC/Alta360/vide 360 bienvenida.mp4"
+        videoSrc="/videos/welcome.mp4"
         className="absolute inset-0"
       />
 

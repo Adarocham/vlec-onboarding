@@ -29,7 +29,7 @@ export default function Calibration() {
 
   return (
     <div className="w-full h-screen flex">
-      <Panorama360 videoSrc="/Users/antoniodarocha/Downloads/Videos360VLEC/Baja/Calibración/T3 calibración.mp4" />
+      <Panorama360 videoSrc="/videos/calibration.mp4" />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none">
         <div className="pointer-events-auto bg-black/60 backdrop-blur-sm p-12 rounded-lg text-center max-w-2xl fade-in">
