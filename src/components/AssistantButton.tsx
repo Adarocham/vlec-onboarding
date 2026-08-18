@@ -24,8 +24,9 @@ export default function AssistantButton() {
       {/* Assistant Button (Bottom Right) */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-gradient-vlec hover:shadow-lg transition z-50 flex items-center justify-center text-white text-2xl"
+        className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-gradient-vlec hover:shadow-xl hover:scale-110 transition z-50 flex items-center justify-center text-white text-2xl"
         title="Preguntar al Asistente VLEC"
+        aria-label="Abrir Asistente VLEC"
       >
         🤖
       </button>
