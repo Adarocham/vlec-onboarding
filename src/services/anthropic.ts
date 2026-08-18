@@ -17,10 +17,14 @@ Responde con claridad, brevedad y enfoque educativo. Usa ejemplos cuando sea nec
 
 export async function askAssistant(question: string): Promise<string> {
   if (!CLAUDE_API_KEY) {
-    return "Error: Claude API key no configurada. Configura VITE_CLAUDE_API_KEY en .env.local"
+    const msg = "Error: Claude API key no configurada. Configura VITE_CLAUDE_API_KEY en .env.local"
+    console.error(msg)
+    return msg
   }
 
   try {
+    console.log('🤖 Enviando pregunta a Claude API...')
+
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -39,16 +43,26 @@ export async function askAssistant(question: string): Promise<string> {
       })
     })
 
+    console.log('📡 Respuesta de API:', response.status, response.statusText)
+
     if (!response.ok) {
       const error = await response.json()
-      console.error('Claude API error:', error)
-      return "No pude procesar tu pregunta. Intenta de nuevo."
+      console.error('❌ Claude API error:', error)
+
+      // Errores específicos
+      if (error.error?.type === 'authentication_error') {
+        return "Error: API key inválida. Verifica VITE_CLAUDE_API_KEY en .env.local"
+      }
+
+      return `Error API: ${error.error?.message || 'Desconocido'}`
     }
 
     const data = await response.json()
+    console.log('✅ Respuesta exitosa:', data.content[0].text.substring(0, 100))
     return data.content[0].text
   } catch (error) {
-    console.error('Error calling Claude API:', error)
-    return "Hubo un error conectando con el asistente. Intenta de nuevo."
+    const errorMsg = error instanceof Error ? error.message : String(error)
+    console.error('❌ Error calling Claude API:', errorMsg, error)
+    return `Error: ${errorMsg}`
   }
 }
